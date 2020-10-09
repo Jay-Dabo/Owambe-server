@@ -14,7 +14,7 @@ app.use(bodyParser.json())
 app.use('/api', api)
 
 app.get('/', function(req, res){
-	res.send('Welcome to Owambe API!!')
+	res.send('Welcome to the Owambe API!!')
 })
 
 app.listen(process.env.PORT || PORT, function(){
