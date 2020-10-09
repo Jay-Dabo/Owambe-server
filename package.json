@@ -1,0 +1,31 @@
+{
+  "name": "owambe-server",
+  "version": "1.0.0",
+  "description": "API for Owambe Donation App (Developed as part of the Google Africa Developers community projects)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "API",
+    "Node.js",
+    "Express.js",
+    "Owambe",
+    "Donation",
+    "GAD",
+    "Google",
+    "Africa",
+    "Developers"
+  ],
+  "author": "Jeffrey K. D. A. Amoah",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.10.5",
+    "nodemon": "^2.0.4"
+  }
+}
