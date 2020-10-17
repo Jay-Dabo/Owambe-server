@@ -18,13 +18,16 @@ firearch.connect(fstore, error => {
     } else {
         console.log('Successfully connected to database!! Keep building!')
     }
-}); 
+});
+
+
+// Controller Imports
+const User = require('../controllers/userController');
 
 
 
 
-
-
-
+// Routings for Users
+router.post('/user/register', User.register);
 
 module.exports = router
