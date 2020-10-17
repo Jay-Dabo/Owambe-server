@@ -1,4 +1,4 @@
-// const config = require('../config.json');
+const config = require('../config.json');
 const jwt = require('jsonwebtoken'); // Use JSON Web Token for Authentications
 
 // Model Imports
@@ -29,17 +29,17 @@ exports.register = function(req, res) {
     if (!userData.address) {
         return res.status(422).send('Please provide your Residential Address')
     }
-    // if (!userData.password) {
-    //     return res.status(422).send('Please provide your Password')
-    // }
+    if (!userData.password) {
+        return res.status(422).send('Please provide your Password')
+    }
 
-    // // Password Verification
-    // if (userData.password != userData.password_confirmation) {
-    //     return res.status(422).json('Password & Password Confirmation do not match')
-    // }
+    // Password Verification
+    if (userData.password != userData.password_confirmation) {
+        return res.status(422).json('Password & Password Confirmation do not match')
+    }
 
     // Registered User Check
-    User.find(('email', '==', userData.email), function(error, registeredUser) {
+    User.findOne({ email: userData.email }, function(error, registeredUser) {
         if (error) {
             return res.status(422).send('Oops! Something went wrong with your registration')
         }
@@ -52,10 +52,9 @@ exports.register = function(req, res) {
                 if (error) {
                     console.log(error)
                 } else {
-                	console.log(registeredUser)
-                    // let payload = { subject: registeredUser._id }
-                    // let token = jwt.sign(payload, { expiresIn: "1d" })
-                    // res.status(200).send({ token })
+                    let payload = { subject: registeredUser._id }
+                    let token = jwt.sign(payload, config.secretKey, { expiresIn: "1d" })
+                    res.status(200).send({ token })
                 }
             });
         }
