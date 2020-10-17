@@ -17,4 +17,12 @@ mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true, useCreat
 });
 
 
+
+// Import Controller files
+const User = require('../controllers/userController');
+
+
+// Routings for Users
+router.get('/user/register', User.register);
+
 module.exports = router
