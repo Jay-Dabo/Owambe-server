@@ -4,6 +4,19 @@ const jwt = require('jsonwebtoken'); // Use JSON Web Token for Authentications
 // Model Imports
 const User = require('../models/user');
 
+
+
+// API Routing Functions
+exports.all = function(req, res) {
+    User.find(function(error, users) {
+        if (error) {
+            return res.status(422).send('Sorry!! Your request could not be processed at the moment, please try again')
+        } else {
+            return res.json(users);
+        }
+    });
+}
+
 exports.register = function(req, res) {
     let userData = req.body
 
