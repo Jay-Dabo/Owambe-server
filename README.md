@@ -1,5 +1,5 @@
 # Owambe-server
-API for Donation App (Developed as part of the Google Africa Developers community projects)
+Official API for the Owambe Donation App (Developed as part of the Google Africa Developers community projects)
 
 ## Prerequisites
 - Have GIT, installed.
@@ -8,30 +8,16 @@ API for Donation App (Developed as part of the Google Africa Developers communit
 - MongoDB and Mongoose.
 - NodeJS, Express
 
-
 ## Setup
-1. Clone the repository
-2. `cd` to the directory
+1. Clone the repository.
+2. `cd` to the directory.
 3. run `npm install`.
+4. run `nodemon server` to begin server.
 
 ## API EndPoints
-- https://owambe-server.herokuapp.com/api/ - API Link
-
-
-1. `user/register`, Registers a user<br/>  Method:- `POST`<br/>  postData:-`{
-    "first_name": "foo",
-    "other_names": "bar",
-    "last_name": "uno",
-    "email": "foobar@uno.com",
-    "gender": "Female",
-    "phone_number": <>,
-    "birth_date": "<>",
-    "address": "ABC Sreeet",
-    "password": "foobaruno",
-    "password_confirmation": "foobaruno"
-}` <br/>Result:- `{
-    "token": <>
-}`
-
-2. `users/`, Returns an Array of users <br> Method:- `POST`
+API Link - https://owambe-server.herokuapp.com/api/ <br>
+- `users/`, Returns a complete array list of all users
+- `user/id`, Returns a specific user queried by ID
+- `user/login`, Log in a user
+- `user/register`, Registers a user
 
