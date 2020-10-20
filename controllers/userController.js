@@ -96,3 +96,34 @@ exports.register = function(req, res) {
         }
     });
 }
+
+exports.login = function(req, res) {
+    let userData = req.body
+
+    // Presence Verification
+    if (!userData.email) {
+        return res.status(422).send('Please provide your email address')
+    }
+    if (!userData.password) {
+        return res.status(422).send('Please provide your Password')
+    }
+
+
+    User.findOne({ email: userData.email }, (error, user) => {
+        if (error) {
+            return res.status(422).send('Oops! Something went wrong. Please try again.')
+        }
+
+        if (!user) {
+            return res.status(401).send('Sorry!! You do not have an account with us. You should consider registering first.')
+        }
+
+        if (!user.hasSamePassword(userData.password)) {
+            return res.status(401).send('Invalid Password')
+        } else {
+            let payload = { subject: user._id }
+            let token = jwt.sign(payload, config.secretKey, { expiresIn: "1d" })
+            res.status(200).send({ token })
+        }
+    });
+}
