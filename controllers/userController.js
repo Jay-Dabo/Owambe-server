@@ -17,6 +17,18 @@ exports.all = function(req, res) {
     });
 }
 
+exports.update = function(req, res) {
+    let userData = req.body
+
+    User.findByIdAndUpdate(req.params._id, { $set: userData }, function(error, user) {
+        if (error) {
+            return res.status(422).send('Oops! Something went wrong with your update request')
+        } else {
+            return res.status(200).send(user)
+        }
+    });
+}
+
 exports.register = function(req, res) {
     let userData = req.body
 
