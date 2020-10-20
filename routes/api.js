@@ -1,4 +1,3 @@
-const config = require('../config.json'); // Configuration File
 const express = require('express'); // Require Express Server
 const jwt = require('jsonwebtoken'); // Use JSON Web Token for Authentications
 const router = express.Router(); // Require Routing for API endpints
@@ -24,6 +23,9 @@ const User = require('../controllers/userController');
 
 // Routings for Users
 router.get('/users', User.all);
+router.get('/users/:_id', User.one);
+router.put('/users/:_id', User.update);
+router.post('/user/login', User.login);
 router.post('/user/register', User.register);
 
 module.exports = router
