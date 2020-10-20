@@ -29,6 +29,17 @@ exports.update = function(req, res) {
     });
 }
 
+exports.one = function(req, res) {
+    User.findById(req.params._id, function(error, user) {
+            if (error) {
+                return res.status(404).send('Sorry!! The queried User could not be found or does not exist in our database')
+            } else {
+                return res.status(200).json(user)
+            }
+        }
+    );
+}
+
 exports.register = function(req, res) {
     let userData = req.body
 
