@@ -1,7 +1,7 @@
 const express = require('express'); // Require Express as Web Server 
 const bodyParser = require('body-parser') // Require Body-Parser as middleware to handle form data
 const cors = require('cors') // Require CORS to accpt cross-site scripts
-const PORT = 3000 // Set API Port to 3000 on Express Server)
+const PORT = 5000 // Set API Port to 3000 on Express Server)
 const api = require('./routes/api')
 
 const app = express() // Express Server Instance 
