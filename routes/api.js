@@ -25,5 +25,6 @@ const User = require('../controllers/userController');
 // Routings for Users
 router.get('/users', User.all);
 router.post('/user/register', User.register);
+router.get('/users/:_id', User.one)
 
 module.exports = router
