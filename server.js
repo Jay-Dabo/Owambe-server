@@ -17,6 +17,6 @@ app.get('/', function(req, res){
 	res.send('Welcome to the Owambe API!!')
 })
 
-app.listen(PORT, function(){
+app.listen(process.env.PORT || PORT, function(){
 	console.log('Owambe API Server running on PORT; ' + PORT)
 })
