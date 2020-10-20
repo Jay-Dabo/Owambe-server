@@ -1,5 +1,7 @@
-const config = require('../config.json');
+const cryptoRandomString = require('crypto-random-string'); // Use Cryptographic Random String for Secret Key generation
 const jwt = require('jsonwebtoken'); // Use JSON Web Token for Authentications
+
+const secretKey = cryptoRandomString({ length: 106, type: 'alphanumeric' });
 
 // Model Imports
 const User = require('../models/user');
@@ -89,7 +91,7 @@ exports.register = function(req, res) {
                     console.log(error)
                 } else {
                     let payload = { subject: registeredUser._id }
-                    let token = jwt.sign(payload, config.secretKey, { expiresIn: "1d" })
+                    let token = jwt.sign(payload, secretKey, { expiresIn: "1d" })
                     res.status(200).send({ token })
                 }
             });
@@ -122,7 +124,7 @@ exports.login = function(req, res) {
             return res.status(401).send('Invalid Password')
         } else {
             let payload = { subject: user._id }
-            let token = jwt.sign(payload, config.secretKey, { expiresIn: "1d" })
+            let token = jwt.sign(payload, secretKey, { expiresIn: "1d" })
             res.status(200).send({ token })
         }
     });
