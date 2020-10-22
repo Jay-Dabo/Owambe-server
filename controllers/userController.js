@@ -1,5 +1,7 @@
-const config = require('../config.json');
+const cryptoRandomString = require('crypto-random-string'); // Use Cryptographic Random String for Secret Key generation
 const jwt = require('jsonwebtoken'); // Use JSON Web Token for Authentications
+
+const secretKey = cryptoRandomString({ length: 106, type: 'alphanumeric' });
 
 // Model Imports
 const User = require('../models/user');
@@ -15,6 +17,29 @@ exports.all = function(req, res) {
             return res.json(users);
         }
     });
+}
+
+exports.update = function(req, res) {
+    let userData = req.body
+
+    User.findByIdAndUpdate(req.params._id, { $set: userData }, function(error, user) {
+        if (error) {
+            return res.status(422).send('Oops! Something went wrong with your update request')
+        } else {
+            return res.status(200).send(user)
+        }
+    });
+}
+
+exports.one = function(req, res) {
+    User.findById(req.params._id, function(error, user) {
+            if (error) {
+                return res.status(404).send('Sorry!! The queried User could not be found or does not exist in our database')
+            } else {
+                return res.status(200).json(user)
+            }
+        }
+    );
 }
 
 exports.register = function(req, res) {
@@ -66,10 +91,41 @@ exports.register = function(req, res) {
                     console.log(error)
                 } else {
                     let payload = { subject: registeredUser._id }
-                    let token = jwt.sign(payload, config.secretKey, { expiresIn: "1d" })
+                    let token = jwt.sign(payload, secretKey, { expiresIn: "1d" })
                     res.status(200).send({ token })
                 }
             });
+        }
+    });
+}
+
+exports.login = function(req, res) {
+    let userData = req.body
+
+    // Presence Verification
+    if (!userData.email) {
+        return res.status(422).send('Please provide your email address')
+    }
+    if (!userData.password) {
+        return res.status(422).send('Please provide your Password')
+    }
+
+
+    User.findOne({ email: userData.email }, (error, user) => {
+        if (error) {
+            return res.status(422).send('Oops! Something went wrong. Please try again.')
+        }
+
+        if (!user) {
+            return res.status(401).send('Sorry!! You do not have an account with us. You should consider registering first.')
+        }
+
+        if (!user.hasSamePassword(userData.password)) {
+            return res.status(401).send('Invalid Password')
+        } else {
+            let payload = { subject: user._id }
+            let token = jwt.sign(payload, secretKey, { expiresIn: "1d" })
+            res.status(200).send({ token })
         }
     });
 }

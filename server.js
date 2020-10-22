@@ -2,7 +2,7 @@ const express = require('express'); // Require Express as Web Server
 const bodyParser = require('body-parser') // Require Body-Parser as middleware to handle form data
 const morgan = require('morgan') // Morgan to log the route actions
 const cors = require('cors') // Require CORS to accpt cross-site scripts
-const PORT = 3000 // Set API Port to 3000 on Express Server)
+const PORT = 5000 // Set API Port to 3000 on Express Server)
 const api = require('./routes/api')
 
 const app = express() // Express Server Instance 
@@ -25,6 +25,7 @@ app.use((req, res, next) => {
 	error.status(404);
 	next(error)
 })
+
 app.use((error, req, res, next) => {
 	res.status(error.status || 500);
 	res.json({
@@ -34,6 +35,6 @@ app.use((error, req, res, next) => {
 	})
 })
 
-app.listen(PORT, function(){
+app.listen(process.env.PORT || PORT, function(){
 	console.log('Owambe API Server running on PORT; ' + PORT)
 })

@@ -13,6 +13,7 @@ const userSchema = new Schema({
     birth_date: { type: Date, format: 'YYYY-mm-dd', required: true },
     address: { type: String, required: true },
     post_office_address: { type: String },
+    account_balance: { type: Number, default: 100000 },
     is_active: { type: Boolean, default: false },
     password: { type: String, min: [8, 'Too short, min 4 characters are required'], required: true },
     password_confirmation: { type: String, min: [8, 'Too short, min 4 characters are required'], required: true },
