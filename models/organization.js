@@ -11,6 +11,7 @@ const organizationSchema = new Schema({
     post_office_address: { type: String },
     account_balance: { type: Number, default: 200000 },
     is_active: { type: Boolean, default: false },
+    user_type: { type: String, default: 'Organization' },
     password: { type: String, min: [8, 'Too short, min 4 characters are required'], required: true },
     password_confirmation: { type: String, min: [8, 'Too short, min 4 characters are required'], required: true },
 },

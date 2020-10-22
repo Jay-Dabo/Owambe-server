@@ -4,7 +4,7 @@
   "description": "API for Owambe Donation App (Developed as part of the Google Africa Developers community projects)",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js"
   },
   "keywords": [
     "API",
@@ -27,12 +27,9 @@
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.10.9",
-    "nodemon": "^2.0.5"
+    "nodemon": "^2.0.6"
   },
   "engines": {
     "node": "13.x"
-  },
-  "scripts": {
-    "start": "node server.js"
   }
 }
