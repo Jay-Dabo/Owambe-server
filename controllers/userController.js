@@ -129,3 +129,13 @@ exports.login = function(req, res) {
         }
     });
 }
+
+exports.delete = function(req, res) {
+    User.findByIdAndRemove(req.params._id, function(error, result) {
+        if (error) {
+            return res.status(422).send('Oops! Something went wrong with your delete request')
+        } else {
+            return res.status(200).send('You have successfully deleted this user')
+        }
+    });
+}
