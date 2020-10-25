@@ -20,7 +20,7 @@ mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true, useCreat
 // Import Controller files
 const User = require('../controllers/userController');
 const Category  = require('../controllers/categoryController');
-const Organization = require("../controllers/organizationController");
+const Organization = require('../controllers/organizationController');
 
 // Routings for Users
 router.get('/users', User.all);
@@ -31,11 +31,11 @@ router.delete('/users/:_id', User.delete);
 router.post('/user/register', User.register);
 
 // Routes for Categories
-router.get('/categories', Category.all)
-router.post('/category/new', Category.add)
-router.get('/categories/:_id', Category.one)
-router.patch('/categories/:_id', Category.update)
-router.delete('/categories/:_id', Category.delete)
+router.get('/categories', Category.all);
+router.post('/category/new', Category.add);
+router.get('/categories/:_id', Category.one);
+router.patch('/categories/:_id', Category.update);
+router.delete('/categories/:_id', Category.delete);
 
 // Routings for Organizations
 router.get('/organizations', Organization.all);
