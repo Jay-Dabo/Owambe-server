@@ -27,6 +27,15 @@ exports.one = function(req, res) {
     );
 }
 
+exports.common = function(req, res) {
+    Fundraiser.find({ categories: req.params.categories }, function(error, fundraisers) {
+        if (error) {
+            return res.status(422).send('Sorry no Fundraiser currently exists for this category')
+        } else {
+            return res.status(200).json(fundraisers)
+        }
+    });
+}
 
 exports.add = function(req, res) {
 	let fundraiserData = req.body

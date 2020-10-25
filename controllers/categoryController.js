@@ -15,17 +15,12 @@ exports.all = function(req, res) {
 }
 
 exports.one = function(req, res) {
-    Category.findById(req.params._id, function(error, category) {
+    Category.findById(req.params._id)
+        .exec(function(error, category) {
             if (error) {
-                return res.status(404).send('Sorry!! The queried category could not be found or does not exist in our database')
+                return res.status(404).send('Sorry!! The queried Category could not be found or does not exist in our database')
             } else {
-                Fundraiser.find({ categories: req.params._id }, function(error, fundraisers) {
-                    if (error) {
-                        return res.status(422).send('Sorry no Fundraiser currently exists for this category')
-                    } else {
-                        return res.status(200).json(fundraisers)
-                    }
-                });
+                return res.status(200).json(category)
             }
         }
     );
