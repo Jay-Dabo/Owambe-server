@@ -19,9 +19,9 @@ exports.one = function(req, res) {
             if (error) {
                 return res.status(404).send('Sorry!! The queried category could not be found or does not exist in our database')
             } else {
-                Fundraiser.findOne({ categories: req.params._id }, function(error, fundraisers) {
+                Fundraiser.find({ categories: req.params._id }, function(error, fundraisers) {
                     if (error) {
-                        console.log(error)
+                        return res.status(422).send('Sorry no Fundraiser currently exists for this category')
                     } else {
                         return res.status(200).json(fundraisers)
                     }

@@ -45,7 +45,7 @@ exports.add = function(req, res) {
     }
 
 
-	Fundraiser.findOne({ id: fundraiserData._id }, function(error, createdFundraiser) {
+	Fundraiser.findOne({ id: new Fundraiser(fundraiserData._id) }, function(error, createdFundraiser) {
 		if (error) {
 			return res.status(422).send('Oops! Something went wrong with creating this fundraiser request')
 		}
