@@ -4,93 +4,84 @@ const jwt = require('jsonwebtoken'); // Use JSON Web Token for Authentications
 const secretKey = cryptoRandomString({ length: 106, type: 'alphanumeric' });
 
 // Model Imports
-const User = require('../models/user');
+const Organization = require('../models/organization');
 
 
 
 // API Routing Functions
 exports.all = function(req, res) {
-    User.find(function(error, users) {
+    Organization.find(function(error, organizations) {
         if (error) {
             return res.status(422).send('Sorry!! Your request could not be processed at the moment, please try again')
         } else {
-            return res.json(users)
+            return res.json(organizations)
         }
     });
 }
 
 exports.update = function(req, res) {
-    let userData = req.body
+    let organizationData = req.body
 
-    User.findByIdAndUpdate(req.params._id, { $set: userData }, function(error, user) {
+    Organization.findByIdAndUpdate(req.params._id, { $set: organizationData }, function(error, organization) {
         if (error) {
             return res.status(422).send('Oops! Something went wrong with your update request')
         } else {
-            return res.status(200).send(user)
+            return res.status(200).send(organization)
         }
     });
 }
 
 exports.one = function(req, res) {
-    User.findById(req.params._id, function(error, user) {
+    Organization.findById(req.params._id, function(error, organization) {
             if (error) {
-                return res.status(404).send('Sorry!! The queried User could not be found or does not exist in our database')
+                return res.status(404).send('Sorry!! The queried Organization could not be found or does not exist in our database')
             } else {
-                return res.status(200).json(user)
+                return res.status(200).json(organization)
             }
         }
     );
 }
 
 exports.register = function(req, res) {
-    let userData = req.body
+    let organizationData = req.body
 
     // Presence Verification
-    if (!userData.first_name) {
+    if (!organizationData.name) {
         return res.status(422).send('Please provide your First Name')
     }
-    if (!userData.last_name) {
-        return res.status(422).send('Please provide your Last Name')
-    }
-    if (!userData.email) {
+    if (!organizationData.email) {
         return res.status(422).send('Please provide your Email Address')
     }
-    if (!userData.phone_number) {
+    if (!organizationData.phone_number) {
         return res.status(422).send('Please provide your Phone Number')
     }
-    if (!userData.gender) {
-        return res.status(422).send('Please select your Gender')
-    }
-    if (!userData.birth_date) {
-        return res.status(422).send('Please provide your Date of Birth')
-    }
-    if (!userData.address) {
+    if (!organizationData.address) {
         return res.status(422).send('Please provide your Residential Address')
     }
-    if (!userData.password) {
+    if (!organizationData.password) {
         return res.status(422).send('Please provide your Password')
     }
 
     // Password Verification
-    if (userData.password != userData.password_confirmation) {
+    if (organizationData.password != organizationData.password_confirmation) {
         return res.status(422).json('Password & Password Confirmation do not match')
     }
 
-    // Registered User Check
-    User.findOne({ email: userData.email }, function(error, registeredUser) {
+    // Registered Organization Check
+    Organization.findOne({ email: organizationData.email }, function(error, registeredOrganization) {
         if (error) {
             return res.status(422).send('Oops! Something went wrong with your registration')
         }
 
-        if (registeredUser) {
-            return res.status(422).send('Sorry!! A User with this bio-data already exists.')
+        if (registeredOrganization) {
+            return res.status(422).send('Sorry!! A Organization with this bio-data already exists.')
         } else {
-            let user = new User(userData)
-            user.save((error, registeredUser) => {
+            let organization = new Organization(organizationData)
+            organization.save((error, registeredOrganization) => {
                 if (error) {
                     console.log(error)
                 } else {
-                    let payload = { subject: registeredUser._id }
+                    let payload = { subject: registeredOrganization._id }
                     let token = jwt.sign(payload, secretKey, { expiresIn: "1d" })
                     res.status(200).send({ token })
                 }
@@ -100,30 +91,30 @@ exports.register = function(req, res) {
 }
 
 exports.login = function(req, res) {
-    let userData = req.body
+    let organizationData = req.body
 
     // Presence Verification
-    if (!userData.email) {
+    if (!organizationData.email) {
         return res.status(422).send('Please provide your email address')
     }
-    if (!userData.password) {
+    if (!organizationData.password) {
         return res.status(422).send('Please provide your Password')
     }
 
 
-    User.findOne({ email: userData.email }, (error, user) => {
+    Organization.findOne({ email: organizationData.email }, (error, organization) => {
         if (error) {
             return res.status(422).send('Oops! Something went wrong. Please try again.')
         }
 
-        if (!user) {
+        if (!organization) {
             return res.status(401).send('Sorry!! You do not have an account with us. You should consider registering first.')
         }
 
-        if (!user.hasSamePassword(userData.password)) {
+        if (!organization.hasSamePassword(organizationData.password)) {
             return res.status(401).send('Invalid Password')
         } else {
-            let payload = { subject: user._id }
+            let payload = { subject: organization._id }
             let token = jwt.sign(payload, secretKey, { expiresIn: "1d" })
             res.status(200).send({ token })
         }
@@ -131,11 +122,11 @@ exports.login = function(req, res) {
 }
 
 exports.delete = function(req, res) {
-    User.findByIdAndRemove(req.params._id, function(error, result) {
+    Organization.findByIdAndRemove(req.params._id, function(error, result) {
         if (error) {
             return res.status(422).send('Oops! Something went wrong with your delete request')
         } else {
-            return res.status(200).send('You have successfully deleted this user')
+            return res.status(200).send('You have successfully deleted this organization')
         }
     });
 }
