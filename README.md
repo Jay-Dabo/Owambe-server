@@ -14,7 +14,7 @@ Official API for the Owambe Donation App (Developed as part of the Google Africa
 3. run `npm install`.
 4. run `nodemon server` to begin server.
 
-## API EndPoints
+## API Endpoints
 Users
 - `user/register`, Registers a new individual user
 - `user/login`, Logs in an existing user
