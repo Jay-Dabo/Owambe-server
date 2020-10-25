@@ -8,6 +8,8 @@ const fundraiserSchema = new Schema({
     title: { type: String, unique: true, required: true },
     description: { type: String, required: true },
     categories: [{ type: Schema.Types.String, ref: 'category', required: true }],
+    solicitor: { type: Schema.Types.ObjectId, ref: 'user' },
+    solicitor_firm: { type: Schema.Types.ObjectId, ref: 'organization' },
     amount: { type: Number, required: true },
     is_active: { type: Boolean, default: false }
 },
