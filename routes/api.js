@@ -22,6 +22,7 @@ const User = require('../controllers/userController');
 const Category  = require('../controllers/categoryController');
 const Organization = require('../controllers/organizationController');
 const Fundraiser = require('../controllers/fundraiserController');
+const Donation = require('../controllers/donationController');
 
 // Routings for Users
 router.get('/users', User.all);
@@ -44,6 +45,13 @@ router.post('/fundraiser/new', Fundraiser.add);
 router.get('/fundraisers/:_id', Fundraiser.one);
 router.patch('/fundraisers/:_id', Fundraiser.update);
 router.delete('/fundraisers/:_id', Fundraiser.delete);
+router.get('/fundraiser/:categories', Fundraiser.common);
+
+// Routes for Donations
+router.get('/donations', Donation.all);
+router.post('/donation/new', Donation.add);
+router.post('/donations/:_id', Donation.one);
+router.get('/donations/:fundraiser', Donation.common);
 
 // Routings for Organizations
 router.get('/organizations', Organization.all);
