@@ -24,6 +24,11 @@ const Organization = require('../controllers/organizationController');
 const Fundraiser = require('../controllers/fundraiserController');
 const Donation = require('../controllers/donationController');
 
+// Root for openEducation API endpoints
+router.get('/', (req, res) => {
+    res.send('Owambe API route root')
+});
+
 // Routings for Users
 router.get('/users', User.all);
 router.get('/users/:_id', User.one);
