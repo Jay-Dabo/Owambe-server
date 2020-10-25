@@ -15,9 +15,31 @@ Official API for the Owambe Donation App (Developed as part of the Google Africa
 4. run `nodemon server` to begin server.
 
 ## API EndPoints
-API Link - https://owambe-server.herokuapp.com/api/ <br>
+Users
+- `user/register`, Registers a new individual user
+- `user/login`, Logs in an existing user
+- `users/:_id`, Returns a specific user queried by ID
 - `users/`, Returns a complete array list of all users
-- `user/id`, Returns a specific user queried by ID
-- `user/login`, Log in a user
-- `user/register`, Registers a user
 
+Organizations
+- `organization/register`, Registers a new organization
+- `organization/login`, Logs in an existing organization
+- `organizations/:_id`, Returns a specific organization queried by ID
+- `organizations/`, Returns a complete array list of all organizations
+
+Categories
+- `category/new`, Creates a new fundraiser category
+- `categories/:_id`, Returns a specific fundraiser category queried by ID
+- `categories/`, Returns a complete array list of all categories
+
+Fundraisers
+- `fundraiser/new`, Creates a new fundraiser request
+- `fundraisers/:_id`, Returns a specific fundraiser request queried by ID
+- `fundraiser/:categories`, Returns a complete list of all fundraiser requests under a specific category
+- `fundraisers/`, Returns a complete array list of all fundraiser requests
+
+Donations
+- `donation/new`, Makes a new donation
+- `donations/:_id`, Returns a specific donation request queried by ID
+- `donation/:fundraiser`, Returns a complete list of all donations made to a specific fundraiser request
+- `donations/`, Returns a complete array list of all donations
