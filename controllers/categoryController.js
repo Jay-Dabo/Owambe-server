@@ -13,6 +13,17 @@ exports.all = function(req, res) {
     });
 }
 
+exports.one = function(req, res) {
+    Category.findById(req.params._id, function(error, category) {
+            if (error) {
+                return res.status(404).send('Sorry!! The queried category could not be found or does not exist in our database')
+            } else {
+                return res.status(200).json(category)
+            }
+        }
+    );
+}
+
 exports.add = function(req, res) {
     let categoryData = req.body
     Category.findOne({ name: categoryData.name }, function(error, createdCategory) {
@@ -21,7 +32,7 @@ exports.add = function(req, res) {
         }
 
         if (createdCategory) {
-            return res.status(422).send('Sorry!! This Category already exists')
+            return res.status(422).send('Sorry!! This category already exists')
         } else {
             let category = new Category(categoryData)
             category.save((error, createdCategory) => {
@@ -33,17 +44,6 @@ exports.add = function(req, res) {
             });
         }
     });
-}
-
-exports.one = function(req, res) {
-    Category.findById(req.params._id, function(error, category) {
-            if (error) {
-                return res.status(404).send('Sorry!! The queried category could not be found or does not exist in our database')
-            } else {
-                return res.status(200).json(category)
-            }
-        }
-    );
 }
 
 exports.update = function(req, res) {
