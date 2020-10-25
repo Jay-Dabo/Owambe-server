@@ -29,6 +29,22 @@ exports.one = function(req, res) {
 
 exports.add = function(req, res) {
 	let donationData = req.body
+
+	// Presence Verification
+    if (!donationData.title) {
+        return res.status(422).send('Please provide your donation title')
+    }
+    if (!donationData.description) {
+        return res.status(422).send('Please provide your donation description')
+    }
+    if (!donationData.categories) {
+        return res.status(422).send('Please provide your donation category(ies)')
+    }
+    if (!donationData.amount) {
+        return res.status(422).send('Please provide your donation request amount')
+    }
+
+
 	Donation.findOne({ id: donationData._id }, function(error, createdDonation) {
 		if (error) {
 			return res.status(422).send('Oops! Something went wrong with creating this donation request')

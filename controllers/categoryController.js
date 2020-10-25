@@ -14,7 +14,9 @@ exports.all = function(req, res) {
 }
 
 exports.one = function(req, res) {
-    Category.findById(req.params._id, function(error, category) {
+    Category.findById(req.params._id)
+        .populate('donations')
+        .exec(function(error, category) {
             if (error) {
                 return res.status(404).send('Sorry!! The queried category could not be found or does not exist in our database')
             } else {
