@@ -14,7 +14,7 @@ exports.all = function(req, res) {
         if (error) {
             return res.status(422).send('Sorry!! Your request could not be processed at the moment, please try again')
         } else {
-            return res.json(users);
+            return res.json(users)
         }
     });
 }

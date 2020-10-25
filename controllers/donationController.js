@@ -3,14 +3,14 @@ const Donation = require('../models/donation')
 
 
 
-exports.all = function(res, req) {
-	Donation.find(function(error, donations) {
-		if (error) {
+exports.all = function(req, res) {
+    Donation.find(function(error, donations) {
+        if (error) {
             return res.status(422).send('Sorry!! Your request could not be processed at the moment, please try again')
-		} else {
-			return res.status(200).json(donations);
-		}
-	});
+        } else {
+            return res.status(200).json(donations)
+        }
+    });
 }
 
 exports.one = function(req, res) {

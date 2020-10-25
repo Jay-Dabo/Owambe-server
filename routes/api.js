@@ -21,7 +21,7 @@ mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true, useCreat
 const User = require('../controllers/userController');
 const Category  = require('../controllers/categoryController');
 const Organization = require('../controllers/organizationController');
-const Donation = require('../controllers/donationContoller');
+const Donation = require('../controllers/donationController');
 
 // Routings for Users
 router.get('/users', User.all);

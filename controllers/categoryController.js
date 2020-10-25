@@ -8,7 +8,7 @@ exports.all = function(req, res) {
         if (error) {
             return res.status(422).send('Sorry!! Your request could not be processed at the moment, please try again')
         } else {
-            return res.status(200).json(categories);
+            return res.status(200).json(categories)
         }
     });
 }
