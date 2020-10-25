@@ -21,7 +21,7 @@ mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true, useCreat
 const User = require('../controllers/userController');
 const Category  = require('../controllers/categoryController');
 const Organization = require('../controllers/organizationController');
-const Donation = require('../controllers/donationController');
+const Fundraiser = require('../controllers/fundraiserController');
 
 // Routings for Users
 router.get('/users', User.all);
@@ -38,12 +38,12 @@ router.get('/categories/:_id', Category.one);
 router.patch('/categories/:_id', Category.update);
 router.delete('/categories/:_id', Category.delete);
 
-// Routes for Donations
-router.get('/donations', Donation.all);
-router.post('/donation/new', Donation.add);
-router.get('/donations/:_id', Donation.one);
-router.patch('/donations/:_id', Donation.update);
-router.delete('/donations/:_id', Donation.delete);
+// Routes for Fundraisers
+router.get('/fundraisers', Fundraiser.all);
+router.post('/fundraiser/new', Fundraiser.add);
+router.get('/fundraisers/:_id', Fundraiser.one);
+router.patch('/fundraisers/:_id', Fundraiser.update);
+router.delete('/fundraisers/:_id', Fundraiser.delete);
 
 // Routings for Organizations
 router.get('/organizations', Organization.all);

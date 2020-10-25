@@ -2,8 +2,8 @@ const cryptoRandomString = require('crypto-random-string'); // Use Cryptographic
 const mongoose = require('mongoose'); // Require Mongooge for connection to Database
 const Schema = mongoose.Schema // Require Schema Instace of Mongoose
 
-// Create Schema for Donation in MongoDb
-const donationSchema = new Schema({
+// Create Schema for Fundraiser in MongoDb
+const fundraiserSchema = new Schema({
     _id: { type: String, default: cryptoRandomString({ length: 10, type: 'numeric' }) },
     title: { type: String, unique: true, required: true },
     description: { type: String, required: true },
@@ -15,4 +15,4 @@ const donationSchema = new Schema({
 	timestamps: true
 });
 
-module.exports = mongoose.model('donation', donationSchema, 'Donations')
+module.exports = mongoose.model('fundraiser', fundraiserSchema, 'Fundraisers')
