@@ -50,8 +50,8 @@ router.get('/fundraiser/:categories', Fundraiser.common);
 // Routes for Donations
 router.get('/donations', Donation.all);
 router.post('/donation/new', Donation.add);
-router.post('/donations/:_id', Donation.one);
-router.get('/donations/:fundraiser', Donation.common);
+router.get('/donations/:_id', Donation.one);
+router.get('/donation/:fundraiser', Donation.common);
 
 // Routings for Organizations
 router.get('/organizations', Organization.all);
