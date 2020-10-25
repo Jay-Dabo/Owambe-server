@@ -16,6 +16,7 @@ exports.all = function(req, res) {
 exports.one = function(req, res) {
     Fundraiser.findById(req.params._id)
         .populate('categories')
+        .populate('solicitor')
         .exec(function(error, fundraiser) {
             if (error) {
                 return res.status(404).send('Sorry!! The queried Fundraiser could not be found or does not exist in our database')
