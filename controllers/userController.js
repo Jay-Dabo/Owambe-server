@@ -58,14 +58,8 @@ exports.register = function(req, res) {
     if (!userData.phone_number) {
         return res.status(422).send('Please provide your Phone Number')
     }
-    if (!userData.gender) {
-        return res.status(422).send('Please select your Gender')
-    }
-    if (!userData.birth_date) {
-        return res.status(422).send('Please provide your Date of Birth')
-    }
-    if (!userData.address) {
-        return res.status(422).send('Please provide your Residential Address')
+    if (!userData.country) {
+        return res.status(422).send('Please provide your residential Country')
     }
     if (!userData.password) {
         return res.status(422).send('Please provide your Password')
