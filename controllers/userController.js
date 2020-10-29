@@ -135,7 +135,7 @@ exports.login = function(req, res) {
     }
 
 
-    Scholar.findOne({ _id: userData._id }, (error, user) => {
+    User.findOne({ _id: userData._id }, (error, user) => {
         if (error) {
             return res.status(422).send('Oops! Something went wrong. Please try again.')
         }
