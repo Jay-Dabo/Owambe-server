@@ -96,7 +96,7 @@ exports.register = function(req, res) {
                     console.log(error)
                 } else {
                     let to = registeredUser.email
-                    let subject = 'Welcome to Owambe'
+                    let subject = 'OWAMBE - ACCOUNT NUMBER NOTIFICATION'
                     let message = "Welcome to Owambe. Your unique account number for all transactionary purposes is: " + registeredUser._id
 
                     const mailOptions = {
