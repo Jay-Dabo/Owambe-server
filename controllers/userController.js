@@ -128,14 +128,14 @@ exports.login = function(req, res) {
 
     // Presence Verification
     if (!userData._id) {
-        return res.status(422).send('Please provide your account number')
+        return res.status(422).send('Please provide your ID Number')
     }
     if (!userData.password) {
         return res.status(422).send('Please provide your Password')
     }
 
 
-    User.findOne({ id: userData._id }, (error, user) => {
+    Scholar.findOne({ _id: userData._id }, (error, user) => {
         if (error) {
             return res.status(422).send('Oops! Something went wrong. Please try again.')
         }
