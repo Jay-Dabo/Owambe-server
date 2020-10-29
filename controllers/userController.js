@@ -100,7 +100,7 @@ exports.register = function(req, res) {
                     let message = "Welcome to Owambe. Your unique account number for all transactionary purposes is: " + registeredUser._id
 
                     const mailOptions = {
-                        from: 'owambe.server@gmail.com',
+                        from: 'Owambe Service',
                         to: to,
                         subject: subject,
                         html: message
