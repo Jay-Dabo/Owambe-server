@@ -8,7 +8,7 @@ const userSchema = new Schema({
     other_names: { type: String },
     last_name: { type: String, required: true },
     gender: { type: String },
-    email: { type: String, lowercase: true, match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/], unique: true, required: true },
+    email: { type: String, lowercase: true, match: [/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/], unique: true, required: true },
     phone_number: { type: Number, required: true },
     birth_date: { type: Date, format: 'YYYY-mm-dd' },
     country: { type: String, required: true },
