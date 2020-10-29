@@ -94,15 +94,15 @@ exports.login = function(req, res) {
     let organizationData = req.body
 
     // Presence Verification
-    if (!organizationData.email) {
-        return res.status(422).send('Please provide your email address')
+    if (!organizationData._id) {
+        return res.status(422).send('Please provide your account number')
     }
     if (!organizationData.password) {
         return res.status(422).send('Please provide your Password')
     }
 
 
-    Organization.findOne({ email: organizationData.email }, (error, organization) => {
+    Organization.findOne({ id: organizationData._id }, (error, organization) => {
         if (error) {
             return res.status(422).send('Oops! Something went wrong. Please try again.')
         }
