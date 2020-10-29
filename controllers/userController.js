@@ -128,7 +128,7 @@ exports.login = function(req, res) {
 
     // Presence Verification
     if (!userData._id) {
-        return res.status(422).send('Please provide your ID Number')
+        return res.status(422).send('Please provide your Account Number')
     }
     if (!userData.password) {
         return res.status(422).send('Please provide your Password')

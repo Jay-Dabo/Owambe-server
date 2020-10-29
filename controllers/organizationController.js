@@ -9,7 +9,7 @@ const transporter = nodemailer.createTransport(smtpTransport({
     service: 'gmail',
     host: 'smtp.gmail.com',
     auth: {
-        user: 'owambe.server@gmail.com',
+        organization: 'owambe.server@gmail.com',
         pass: 'server.owambe'
     }
 }));
@@ -125,14 +125,14 @@ exports.login = function(req, res) {
 
     // Presence Verification
     if (!organizationData._id) {
-        return res.status(422).send('Please provide your account number')
+        return res.status(422).send('Please provide your Account Number')
     }
     if (!organizationData.password) {
         return res.status(422).send('Please provide your Password')
     }
 
 
-    Organization.findOne({ id: organizationData._id }, (error, organization) => {
+    Organization.findOne({ _id: organizationData._id }, (error, organization) => {
         if (error) {
             return res.status(422).send('Oops! Something went wrong. Please try again.')
         }
