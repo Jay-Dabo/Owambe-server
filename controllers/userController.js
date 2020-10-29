@@ -127,15 +127,15 @@ exports.login = function(req, res) {
     let userData = req.body
 
     // Presence Verification
-    if (!userData.email) {
-        return res.status(422).send('Please provide your email address')
+    if (!userData._id) {
+        return res.status(422).send('Please provide your account number')
     }
     if (!userData.password) {
         return res.status(422).send('Please provide your Password')
     }
 
 
-    User.findOne({ email: userData.email }, (error, user) => {
+    User.findOne({ id: userData._id }, (error, user) => {
         if (error) {
             return res.status(422).send('Oops! Something went wrong. Please try again.')
         }
