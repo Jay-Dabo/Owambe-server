@@ -1,7 +1,18 @@
 const cryptoRandomString = require('crypto-random-string'); // Use Cryptographic Random String for Secret Key generation
 const jwt = require('jsonwebtoken'); // Use JSON Web Token for Authentications
+const nodemailer = require('nodemailer'); // Use Nodemailer for delivering messages between different email hosts as a protocol
+const smtpTransport = require('nodemailer-smtp-transport'); // SMTP transport module for Nodemailer
 
 const secretKey = cryptoRandomString({ length: 106, type: 'alphanumeric' });
+
+const transporter = nodemailer.createTransport(smtpTransport({
+    service: 'gmail',
+    host: 'smtp.gmail.com',
+    auth: {
+        user: 'owambe.server@gmail.com',
+        pass: 'server.owambe'
+    }
+}));
 
 // Model Imports
 const Organization = require('../models/organization');
@@ -76,6 +87,25 @@ exports.register = function(req, res) {
         if (registeredOrganization) {
             return res.status(422).send('Sorry!! A Organization with this bio-data already exists.')
         } else {
+            let to = registeredOrganization.email
+            let subject = 'OWAMBE - ACCOUNT NUMBER NOTIFICATION'
+            let message = "Welcome to Owambe. Your unique account number for all transactionary purposes is: " + registeredOrganization._id
+
+            const mailOptions = {
+                from: 'owambe.server@gmail.com',
+                to: to,
+                subject: subject,
+                html: message
+            };
+
+            transporter.sendMail(mailOptions, function(error, info){
+                if (error) {
+                    console.log(error);  
+                } else {     
+                    console.log('Email sent: ' + info.response);  
+                }   
+            });
+                    
             let organization = new Organization(organizationData)
             organization.save((error, registeredOrganization) => {
                 if (error) {
