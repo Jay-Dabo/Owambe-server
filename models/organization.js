@@ -5,7 +5,7 @@ const bcrypt = require('bcryptjs'); // Require BCrypt for Password encryption
 // Create Schema for Organizations in MongoDb
 const organizationSchema = new Schema({
     name: { type: String, required: true },
-    email: { type: String, lowercase: true, match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/], unique: true, required: true },
+    email: { type: String, lowercase: true, match: [/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/], unique: true, required: true },
     phone_number: { type: Number, required: true },
     address: { type: String, required: true },
     post_office_address: { type: String },
