@@ -4,6 +4,9 @@ const router = express.Router(); // Require Routing for API endpints
 
 // Require Mongooge for connection to Database
 const mongoose = require('mongoose');
+const multer = require('multer');
+const fs = require('fs')
+
 
 // Connect to Database in MongoDb
 const db = "mongodb+srv://owambe-admin:sPDSmbVEakeozNBF@owambe.u03su.mongodb.net/Owambe?retryWrites=true&w=majority"
@@ -65,5 +68,57 @@ router.post('/organization/login', Organization.login);
 router.patch('/organizations/:_id', Organization.update);
 router.delete('/organizations/:_id', Organization.delete);
 router.post('/organization/register', Organization.register);
+
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, 'uploads')
+    },
+    filename: function (req, file, cb) {
+      cb(null, file.fieldname + '-' + Date.now()+ '.jpg')
+    },
+    fileFilter,
+  })
+   
+  var upload = multer({ storage: storage })
+
+// multer middleware
+
+//multer filter
+function fileFilter(req,file,cb){
+    const allowedTypes = ["image/jpeg","image/png"];
+
+    if(!allowedTypes.includes(file.mimetype)){
+        error = new Error("Wrong file type");
+        error.code= "INVALID_FILE_FORMAT"
+       return cb(error,false)
+    }
+    cb(null,true)
+
+}
+
+// router.get('/uploadForm',function (req,res){
+//     res.sendFile(__dirname + '/upload.html');
+// })
+
+router.post('/Upload',upload.single("myFile"),async (req,res,next)=>{
+    
+    try{
+
+        const file = req.file
+        if (!file) {
+            const error = new Error('Please upload a file')
+            error.httpStatusCode = 400
+            return next(error)
+        }
+            res.send(file)
+    }
+    catch(err){
+            // console.log(err);
+            res.status(403).send(err)
+            
+    }
+
+
+})
 
 module.exports = router

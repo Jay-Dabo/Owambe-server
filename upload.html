@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <form action="/api/Upload" enctype="multipart/form-data" method="POST"> 
+        <input type="file" name="myFile" />
+        <input type="submit" value="Upload a file"/>
+     </form>
+
+    <!-- <input id="myFile" type="file"/>
+    <button id="uploadBtn">Upload</button> -->
+
+    <script>
+        var uploadBtn = document.getElementById("uploadBtn");
+        var myFile = document.getElementById("myFile");
+        // uploadBtn.addEventListener("click",upload);
+
+        // function upload(){
+        //     const file = myFile.file.files[0]
+        //     const formData = new FormData()
+        //     formData.append("file",file)
+        //     var xhr = new XMLHttpRequest();
+        //     try {
+               
+        //         xhr.onreadystatechange = function(e) {
+        //             if ( 4 == this.readyState ) {
+        //                 console.log(['xhr upload complete', e]);
+        //             }
+        //         };
+        //         xhr.open('post', '/api/Upload', true);
+        //         xhr.setRequestHeader("Content-Type","multipart/form-data");
+        //         xhr.send(formData);
+        //         // const res = await this.$axios.post('/api/awsUpload',formData,{
+        //         //     onUploadProgress: e=>  console.log(Math.round(e.loaded*100/e.total))
+        //         // })
+                
+        //         // this.menuItemInput.imageUrl = res.data.file
+         
+                
+        //     }
+        //     catch(err){
+        //         this.error = 'Check your internet connection and upload a valid image'
+        //         this.uploading =false
+        //     }
+        // }
+    </script>
+    
+</body>
+</html>

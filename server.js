@@ -10,6 +10,7 @@ const app = express() // Express Server Instance
 app.use(morgan('dev'))
 app.use(cors()) // Cors for Cross-Site Scripting
 
+
 // Specify BodyParser to handle JSON Data
 app.use(bodyParser.json())
 
@@ -17,6 +18,10 @@ app.use('/api', api)
 
 app.get('/', function(req, res){
 	res.send('Welcome to the Owambe API!!')
+})
+
+app.get('/uploadForm', function(req, res){
+	res.sendFile(__dirname + '/upload.html');
 })
 
 // Handle requests not handled by the routes
@@ -34,6 +39,7 @@ app.use((error, req, res, next) => {
 		}
 	})
 })
+
 
 app.listen(process.env.PORT || PORT, function(){
 	console.log('Owambe API Server running on PORT; ' + PORT)
